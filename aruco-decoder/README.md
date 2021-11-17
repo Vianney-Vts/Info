@@ -31,9 +31,15 @@ pip3 install -r requirements.txt
 from aruco import ArucoDetector
 
 ar = ArucoDetector()
-img = "your-image-path"
 
-print(ar.read_image(img))
+# load the image input image
+image_path = os.path.abspath("your-image-path")
+image = cv2.imread(image_path)
+
+# aruco detection
+corners_array, values = ar.read_image(image)
+ar.show_aruco_codes(image, corners_array, values)
+print(values)
 ```
 Check [image.py](example-image.py)
 

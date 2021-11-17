@@ -1,4 +1,9 @@
+# to start searching the modules from the parent folder
+import sys
+sys.path.append("..")
+
 import os
+import cv2
 import unittest
 
 from aruco import ArucoDetector
@@ -8,20 +13,31 @@ class TestArucoDetectionGreen(unittest.TestCase):
 
     ar = ArucoDetector()
 
-    GREEN = 36
+    GREEN = "green"
 
     def test_green(self):
-        result = self.ar.read_image(os.path.abspath("./datasets/green.jpg"))
-        self.assertEqual(self.GREEN, result)
+        image_path = os.path.abspath("./datasets/green.jpg")
+        image = cv2.imread(image_path)
+        _, result = self.ar.read_image(image)
+        self.assertEqual(self.GREEN, result[0])
 
     def test_green_tilted_r(self):
-        result = self.ar.read_image(os.path.abspath("./datasets/green-tilted-r.jpg"))
-        self.assertEqual(self.GREEN, result)
+        image_path = os.path.abspath("./datasets/green-tilted-r.jpg")
+        image = cv2.imread(image_path)
+        _, result = self.ar.read_image(image)
+        self.assertEqual(self.GREEN, result[0])
 
     def test_green_reverse(self):
-        result = self.ar.read_image(os.path.abspath("./datasets/green-reverse.jpg"))
-        self.assertEqual(self.GREEN, result)
+        image_path = os.path.abspath("./datasets/green-reverse.jpg")
+        image = cv2.imread(image_path)
+        _, result = self.ar.read_image(image)
+        self.assertEqual(self.GREEN, result[0])
 
     def test_green_tilted_l(self):
-        result = self.ar.read_image(os.path.abspath("./datasets/green-tilted-l.jpg"))
-        self.assertEqual(self.GREEN, result)
+        image_path = os.path.abspath("./datasets/green-tilted-l.jpg")
+        image = cv2.imread(image_path)
+        _, result = self.ar.read_image(image)
+        self.assertEqual(self.GREEN, result[0])
+
+if __name__ == '__main__':
+    unittest.main(verbosity=3)

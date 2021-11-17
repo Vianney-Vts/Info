@@ -7,14 +7,18 @@ ar = ArucoDetector()
 
 while True:
     _, frame = cam.read()
+
+    # aruco detection
+    corners_array, values = ar.read_image(frame)
+    ar.show_aruco_codes(frame, corners_array, values)
+
     cv2.imshow('Input', frame)
 
-    codes = ar.read_frame(frame)
+    if len(values) > 0:
+        print(values)
 
-    if len(codes) > 0:
-        print("Codes: ", codes)
+    c = cv2.waitKey(100)
 
-    c = cv2.waitKey(1)
     if c == 27:
         break
 
